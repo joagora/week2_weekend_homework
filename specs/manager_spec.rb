@@ -5,7 +5,7 @@ class TestManager < MiniTest::Test
 
   def setup
     @manager_ben = Manager.new("Ben")
-    @guest_mike = Guest.new("Mike", 100, "Cry me a river")
+    @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
   end
 
   def test_name
@@ -20,8 +20,8 @@ class TestManager < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  def test_ask_to_leave
+  def test_ask_to_leave__male
     expected = "Sir, I am gonna have to ask you to leave."
-    actual = @manager_ben.ask_to_leave(@guest)
+    actual = @manager_ben.ask_to_leave(@guest_mike)
   end
 end
