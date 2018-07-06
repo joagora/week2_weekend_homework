@@ -14,6 +14,11 @@ class TestBartender < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_call_manager
+    expected = "I will go get the manager"
+    actual = @bartender_john.call_manager(@manager_ben)
+    assert_equal(expected, actual)
+  end
 
 
 end
