@@ -1,3 +1,4 @@
+require_relative("manager")
 class Bartender
 
   attr_reader :name
@@ -5,5 +6,5 @@ class Bartender
     @name = name
   end
 
-  
+
 end

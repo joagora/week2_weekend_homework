@@ -5,6 +5,7 @@ class TestBartender < MiniTest::Test
 
   def setup
     @bartender_john = Bartender.new("John")
+    @manager_ben = Manager.new("Ben")
   end
 
   def test_name
@@ -12,5 +13,7 @@ class TestBartender < MiniTest::Test
     actual = @bartender_john.name
     assert_equal(expected, actual)
   end
+
+
 
 end
