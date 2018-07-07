@@ -18,4 +18,5 @@ class Test_Guest < MiniTest::Test
     actual = @guest_mike.gender
     assert_equal(expected, actual)
   end
+
 end

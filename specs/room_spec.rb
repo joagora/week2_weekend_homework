@@ -77,4 +77,10 @@ class TestRoom < MiniTest::Test
     actual = @pop_room.song_list.length
     assert_equal(expected, actual)
   end
+
+  def test_add_to_till
+    expected = 100
+    actual = @pop_room.add_to_till(100)
+    assert_equal(expected, actual)
+  end
 end

@@ -10,6 +10,7 @@ class Room
     @entry_fee = entry_fee
     @reservations = []
     @song_list = []
+    @till = 0
   end
 
   def check_in guest
@@ -36,6 +37,8 @@ class Room
     @song_list << song
   end
 
-
+  def add_to_till amount
+    @till += amount
+  end
 
 end
