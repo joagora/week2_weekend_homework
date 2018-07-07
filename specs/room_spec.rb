@@ -131,4 +131,11 @@ class TestRoom < MiniTest::Test
     actual = @rock_room.check_if_can_afford(@guest_beata)
     assert_equal(expected, actual)
   end
+
+  def test_find_song_by_title
+    @rock_room.add_song(@song1)
+    expected = @song1
+    actual = @rock_room.find_song_by_title("Passenger")
+    assert_equal(expected, actual)
+  end
 end

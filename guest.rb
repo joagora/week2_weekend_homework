@@ -14,4 +14,5 @@ class Guest
     room.add_to_till(room.entry_fee)
   end
 
+  
 end

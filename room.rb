@@ -62,4 +62,14 @@ class Room
       return false
     end
   end
+
+  def find_song_by_title title
+    for song in @song_list
+      if song.title == title
+        return song
+      else
+        return nil
+      end
+    end
+  end
 end
