@@ -5,7 +5,9 @@ class TestRoom < MiniTest::Test
 
   def setup
     @pop_room = Room.new("pop", 7, 10)
+    @rock_room = Room.new("goth", 2, 15)
     @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
+    @guest_beata = Guest.new("Beata", 30, "Simply the best", "male")
   end
 
   def test_music_type
@@ -36,6 +38,20 @@ class TestRoom < MiniTest::Test
   def test_how_many_reservations
     expected = 0
     actual = @pop_room.count_reservations
+    assert_equal(expected, actual)
+  end
+
+  def test_check_if_seats_available__true
+    expected = true
+    actual = @pop_room.available_seats?
+    assert_equal(expected, actual)
+  end
+
+  def test_check_if_seats_available__false
+    @rock_room.check_in(@guest_mike)
+    @rock_room.check_in(@guest_beata)
+    expected = false
+    actual = @rock_room.available_seats?
     assert_equal(expected, actual)
   end
 end

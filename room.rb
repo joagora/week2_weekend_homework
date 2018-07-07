@@ -18,6 +18,14 @@ class Room
     @reservations.length
   end
 
+  def available_seats?
+    if @seats > count_reservations
+      return true
+    else
+      return false
+    end
+  end
+
 
 
 end
