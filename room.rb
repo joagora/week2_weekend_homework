@@ -41,4 +41,9 @@ class Room
     @till += amount
   end
 
+  def refuse_check_in
+    if available_seats? == false
+      return "No seats available"
+    end
+  end
 end

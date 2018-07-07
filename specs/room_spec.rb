@@ -5,7 +5,7 @@ class TestRoom < MiniTest::Test
 
   def setup
     @pop_room = Room.new("pop", 7, 10)
-    @rock_room = Room.new("goth", 2, 15)
+    @rock_room = Room.new("rock", 2, 15)
     @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
     @guest_beata = Guest.new("Beata", 30, "Simply the best", "male")
 
@@ -81,6 +81,14 @@ class TestRoom < MiniTest::Test
   def test_add_to_till
     expected = 100
     actual = @pop_room.add_to_till(100)
+    assert_equal(expected, actual)
+  end
+
+  def test_refuse_check_in
+    @rock_room.check_in(@guest_mike)
+    @rock_room.check_in(@guest_beata)
+    expected = "No seats available"
+    actual = @rock_room.refuse_check_in
     assert_equal(expected, actual)
   end
 end
