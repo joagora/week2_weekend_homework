@@ -15,7 +15,16 @@ class Guest
   end
 
   def request_song title, room
-    room.play_song_by_title(title)
+    played_song = room.play_song_by_title(title)
+
+    if title == @favourite_song
+      return "#{cheer} #{played_song}"
+    else
+      return played_song
+    end
   end
 
+  def cheer
+    return "Whooooo"
+  end
 end

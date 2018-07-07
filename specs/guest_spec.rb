@@ -4,7 +4,8 @@ require_relative("../guest")
 class Test_Guest < MiniTest::Test
 
   def setup
-    @guest_mike = Guest.new("Mike", 30, "Cry me a river", "male", 100)
+    @guest_joanna = Guest.new("Joanna", 27, "Doing it to death", "female", 30)
+    @guest_mike = Guest.new("Mike", 30, "Passenger", "male", 100)
     @pop_room = Room.new("pop", 7, 10)
     lyrics = "I am the passenger
     And I ride and I ride
@@ -42,8 +43,25 @@ class Test_Guest < MiniTest::Test
     I see the stars come out of the sky
     Yeah, they're bright in a hollow sky
     You know it looks so good tonight..."
-    actual = @guest_mike.request_song("Passenger", @pop_room)
+    actual = @guest_joanna.request_song("Passenger", @pop_room)
     assert_equal(expected, actual)
   end
 
+  def test_cheer
+    expected = "Whooooo"
+    actual = @guest_mike.cheer
+    assert_equal(expected, actual)
+  end
+
+  def test_if_cheering_on_song
+    @pop_room.add_song(@song1)
+    expected = "Whooooo Tudumdum Tudumdum I am the passenger
+    And I ride and I ride
+    I ride through the city's backsides
+    I see the stars come out of the sky
+    Yeah, they're bright in a hollow sky
+    You know it looks so good tonight..."
+    actual = @guest_mike.request_song("Passenger", @pop_room)
+    assert_equal(expected, actual)
+  end
 end
