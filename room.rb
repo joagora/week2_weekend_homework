@@ -14,6 +14,10 @@ class Room
     @reservations << guest
   end
 
+  def check_out guest
+    @reservations.delete(guest)
+  end
+
   def count_reservations
     @reservations.length
   end

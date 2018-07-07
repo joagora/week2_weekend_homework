@@ -54,4 +54,12 @@ class TestRoom < MiniTest::Test
     actual = @rock_room.available_seats?
     assert_equal(expected, actual)
   end
+
+  def test_check_out
+    @pop_room.check_in(@guest_mike)
+    @pop_room.check_out(@guest_mike)
+    expected = 0
+    actual = @pop_room.reservations.length
+    assert_equal(expected, actual)
+  end
 end
