@@ -1,13 +1,15 @@
 require_relative("guest")
+require_relative("song")
 
 class Room
 
-  attr_reader :music_type, :seats, :entry_fee, :reservations
+  attr_reader :music_type, :seats, :entry_fee, :reservations, :song_list
   def initialize music_type, seats, entry_fee
     @music_type = music_type
     @seats = seats
     @entry_fee = entry_fee
     @reservations = []
+    @song_list = []
   end
 
   def check_in guest
@@ -28,6 +30,10 @@ class Room
     else
       return false
     end
+  end
+
+  def add_song song
+    @song_list << song
   end
 
 

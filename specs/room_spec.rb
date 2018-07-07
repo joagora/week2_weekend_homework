@@ -8,6 +8,14 @@ class TestRoom < MiniTest::Test
     @rock_room = Room.new("goth", 2, 15)
     @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
     @guest_beata = Guest.new("Beata", 30, "Simply the best", "male")
+
+    lyrics = "I am the passenger
+    And I ride and I ride
+    I ride through the city's backsides
+    I see the stars come out of the sky
+    Yeah, they're bright in a hollow sky
+    You know it looks so good tonight..."
+    @song1 = Song.new("Passenger", lyrics, "Iggy Pop")
   end
 
   def test_music_type
@@ -60,6 +68,13 @@ class TestRoom < MiniTest::Test
     @pop_room.check_out(@guest_mike)
     expected = 0
     actual = @pop_room.reservations.length
+    assert_equal(expected, actual)
+  end
+
+  def test_add_song
+    @pop_room.add_song(@song1)
+    expected = 1
+    actual = @pop_room.song_list.length
     assert_equal(expected, actual)
   end
 end
