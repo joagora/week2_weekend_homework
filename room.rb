@@ -1,3 +1,4 @@
+require('pry')
 require_relative("guest")
 require_relative("song")
 
@@ -13,11 +14,16 @@ class Room
     @till = 0
   end
 
+  def add_to_reservations guest
+    @reservations.push(guest)
+
+  end
+
   def check_in guest
-    if available_seats? == true
-      @reservations << guest
+    if (available_seats? == true) && (check_if_can_afford(guest) == true)
+      add_to_reservations(guest)
     else
-      refuse_check_in
+      return "No seats available"
     end
   end
 

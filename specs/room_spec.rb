@@ -6,9 +6,10 @@ class TestRoom < MiniTest::Test
   def setup
     @pop_room = Room.new("pop", 7, 10)
     @rock_room = Room.new("rock", 2, 15)
-    @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
-    @guest_beata = Guest.new("Beata", 30, "Simply the best", "male")
-    @guest_joanna = Guest.new("Joanna", 27, "Doing it to death", "female")
+    @guest_mike = Guest.new("Mike", 30, "Cry me a river", "male", 100)
+    @guest_beata = Guest.new("Beata", 30, "Simply the best", "female", 10)
+    @guest_john = Guest.new("John", 30, "We are the champions", "male", 19)
+    @guest_joanna = Guest.new("Joanna", 27, "Doing it to death", "female", 30)
 
     lyrics = "I am the passenger
     And I ride and I ride
@@ -47,15 +48,26 @@ class TestRoom < MiniTest::Test
   def test_check_in__no_available_seats
     @rock_room.check_in(@guest_mike)
     @rock_room.check_in(@guest_beata)
+    @rock_room.check_in(@guest_joanna)
+    expected = 2
+    actual = @rock_room.reservations.length
+    assert_equal(expected, actual)
+  end
 
+  def test_check_in__no_available_seats_refused
+    @rock_room.check_in(@guest_mike)
+    @rock_room.check_in(@guest_john)
     expected = "No seats available"
     actual = @rock_room.check_in(@guest_joanna)
     assert_equal(expected, actual)
   end
 
-  def test_guest_can_afford_entry
-    expected = true
-    actual = @pop_room.check_if_can_afford(@guest_mike)
+  def test_add_guest_to_reservations
+    @rock_room.add_to_reservations(@guest_mike)
+    @rock_room.add_to_reservations(@guest_beata)
+
+    expected = 2
+    actual = @rock_room.count_reservations
     assert_equal(expected, actual)
   end
 
@@ -72,15 +84,15 @@ class TestRoom < MiniTest::Test
   end
 
   def test_check_if_seats_available__false
-    @rock_room.check_in(@guest_mike)
-    @rock_room.check_in(@guest_beata)
+    @rock_room.add_to_reservations(@guest_mike)
+    @rock_room.add_to_reservations(@guest_beata)
     expected = false
     actual = @rock_room.available_seats?
     assert_equal(expected, actual)
   end
 
   def test_check_out
-    @pop_room.check_in(@guest_mike)
+    @pop_room.add_to_reservations(@guest_mike)
     @pop_room.check_out(@guest_mike)
     expected = 0
     actual = @pop_room.reservations.length
@@ -101,10 +113,22 @@ class TestRoom < MiniTest::Test
   end
 
   def test_refuse_check_in
-    @rock_room.check_in(@guest_mike)
-    @rock_room.check_in(@guest_beata)
+    @rock_room.add_to_reservations(@guest_mike)
+    @rock_room.add_to_reservations(@guest_beata)
     expected = "No seats available"
     actual = @rock_room.refuse_check_in
+    assert_equal(expected, actual)
+  end
+
+  def test_guest_can_afford_entry
+    expected = true
+    actual = @pop_room.check_if_can_afford(@guest_mike)
+    assert_equal(expected, actual)
+  end
+
+  def test_guest_can_afford_entry__false
+    expected = false
+    actual = @rock_room.check_if_can_afford(@guest_beata)
     assert_equal(expected, actual)
   end
 end
