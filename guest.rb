@@ -14,5 +14,8 @@ class Guest
     room.add_to_till(room.entry_fee)
   end
 
-  
+  def request_song title, room
+    room.play_song_by_title(title)
+  end
+
 end
