@@ -72,4 +72,9 @@ class Room
       end
     end
   end
+
+  def play_song_by_title title
+    song_to_play = find_song_by_title(title)
+    song_to_play.play
+  end
 end

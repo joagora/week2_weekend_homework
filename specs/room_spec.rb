@@ -138,4 +138,16 @@ class TestRoom < MiniTest::Test
     actual = @rock_room.find_song_by_title("Passenger")
     assert_equal(expected, actual)
   end
+
+  def test_play_song_by_title
+    @rock_room.add_song(@song1)
+    expected = "Tudumdum Tudumdum I am the passenger
+    And I ride and I ride
+    I ride through the city's backsides
+    I see the stars come out of the sky
+    Yeah, they're bright in a hollow sky
+    You know it looks so good tonight..."
+    actual = @rock_room.play_song_by_title("Passenger")
+    assert_equal(expected, actual)
+  end
 end
