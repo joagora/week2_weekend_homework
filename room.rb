@@ -4,7 +4,7 @@ require_relative("song")
 
 class Room
 
-  attr_reader :music_type, :seats, :entry_fee, :reservations, :song_list
+  attr_reader :music_type, :seats, :entry_fee, :reservations, :song_list, :till
   def initialize music_type, seats, entry_fee
     @music_type = music_type
     @seats = seats
