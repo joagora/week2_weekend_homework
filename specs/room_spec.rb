@@ -8,6 +8,7 @@ class TestRoom < MiniTest::Test
     @rock_room = Room.new("rock", 2, 15)
     @guest_mike = Guest.new("Mike", 100, "Cry me a river", "male")
     @guest_beata = Guest.new("Beata", 30, "Simply the best", "male")
+    @guest_joanna = Guest.new("Joanna", 27, "Doing it to death", "female")
 
     lyrics = "I am the passenger
     And I ride and I ride
@@ -36,10 +37,19 @@ class TestRoom < MiniTest::Test
     assert_equal(expected, actual)
   end
 
-  def test_check_in
+  def test_check_in__available_seats
     @pop_room.check_in(@guest_mike)
     expected = 1
     actual = @pop_room.reservations.length
+    assert_equal(expected, actual)
+  end
+
+  def test_check_in__no_available_seats
+    @rock_room.check_in(@guest_mike)
+    @rock_room.check_in(@guest_beata)
+
+    expected = "No seats available"
+    actual = @rock_room.check_in(@guest_joanna)
     assert_equal(expected, actual)
   end
 

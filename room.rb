@@ -14,7 +14,11 @@ class Room
   end
 
   def check_in guest
-    @reservations << guest
+    if available_seats? == true
+      @reservations << guest
+    else
+      refuse_check_in
+    end
   end
 
   def check_out guest
@@ -42,8 +46,6 @@ class Room
   end
 
   def refuse_check_in
-    if available_seats? == false
       return "No seats available"
-    end
   end
 end
