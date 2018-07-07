@@ -53,6 +53,12 @@ class TestRoom < MiniTest::Test
     assert_equal(expected, actual)
   end
 
+  def test_guest_can_afford_entry
+    expected = true
+    actual = @pop_room.check_if_can_afford(@guest_mike)
+    assert_equal(expected, actual)
+  end
+
   def test_how_many_reservations
     expected = 0
     actual = @pop_room.count_reservations

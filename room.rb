@@ -48,4 +48,12 @@ class Room
   def refuse_check_in
       return "No seats available"
   end
+
+  def check_if_can_afford guest
+    if guest.wallet >= @entry_fee
+      return true
+    else
+      return false
+    end
+  end
 end
